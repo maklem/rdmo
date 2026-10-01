@@ -4,16 +4,13 @@ import { isNil } from 'lodash'
 
 import { navigateDashboard } from '../../actions/navigationActions'
 import { downloadAnswers, downloadView } from '../../actions/projectActions'
-import { getDocumentParameters } from '../../utils/documentoptions'
 
-import DocumentOptions from '../helper/DocumentOptions'
 import SnapshotsDropdown from '../helper/SnapshotsDropdown'
 import ViewTile from '../helper/ViewTile'
 
 const Documents = () => {
   const dispatch = useDispatch()
 
-  const config = useSelector((state) => state.config)
   const { snapshotId, viewId, detail } = useSelector((state) => state.config)
   const { views } = useSelector((state) => state.project.project) ?? {}
   const area = snapshotId ? 'snapshots' : 'documents'
@@ -56,21 +53,7 @@ const Documents = () => {
             title={gettext('List all questions')}
             help={gettext('Overview of all questions. Optionally with help texts.')}
             onClick={() => dispatch(navigateDashboard({ area, snapshotId, detail: 'questions' }))}
-            onExport={
-              (format) => {
-                dispatch(downloadAnswers(snapshotId, format,
-                  {...getDocumentParameters(config), 'hide_answers': 'true'})
-                )
-              }
-            }
-            additionalExportItems={
-              (
-                <>
-                  <DocumentOptions/>
-                  <hr />
-                </>
-              )
-            }
+            onExport={(format) => {dispatch(downloadAnswers(snapshotId, format, {'hide_answers': 'true'}))}}
           />
         </div>
         <div className="col-lg-6">
@@ -78,21 +61,7 @@ const Documents = () => {
             title={gettext('List all answers')}
             help={gettext('Overview of all questions and answers. Optionally with help texts.')}
             onClick={() => dispatch(navigateDashboard({ area, snapshotId, detail: 'answers' }))}
-            onExport={
-              (format) => {
-                dispatch(downloadAnswers(snapshotId, format,
-                  {...getDocumentParameters(config), 'hide_answers': 'false'})
-                )
-              }
-            }
-            additionalExportItems={
-              (
-                <>
-                  <DocumentOptions/>
-                  <hr />
-                </>
-              )
-            }
+            onExport={(format) => {dispatch(downloadAnswers(snapshotId, format, {'hide_answers': 'false'}))}}
           />
         </div>
       </div>

@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { Dropdown } from 'bootstrap'
 import classNames from 'classnames'
 
-const ExportsDropdown = ({ onExport, additionalItems, align = 'end', dropdownLabel = gettext('Download') }) => {
+const ExportsDropdown = ({ onExport, align = 'end', dropdownLabel = gettext('Download') }) => {
 
   const exportFormats = useSelector((state) => state.settings.export_formats) ?? {}
 
@@ -34,7 +34,6 @@ const ExportsDropdown = ({ onExport, additionalItems, align = 'end', dropdownLab
       </button>
 
       <ul className="dropdown-menu">
-        {additionalItems}
         {
           exportFormats.map(([format, label]) => (
             <li key={format}>
@@ -51,7 +50,6 @@ const ExportsDropdown = ({ onExport, additionalItems, align = 'end', dropdownLab
 
 ExportsDropdown.propTypes = {
   onExport: PropTypes.func.isRequired,
-  additionalItems: PropTypes.object,
   align: PropTypes.oneOf(['start', 'end']),
   dropdownLabel: PropTypes.string
 }
