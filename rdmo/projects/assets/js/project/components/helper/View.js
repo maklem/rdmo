@@ -8,7 +8,7 @@ import { navigateDashboard } from '../../actions/navigationActions'
 import { downloadAnswers, downloadView } from '../../actions/projectActions'
 import { getDocumentParameters } from '../../utils/documentoptions'
 
-import DocumentOptionsDropdown from './DocumentOptionsDropdown'
+import DocumentOptions from './DocumentOptions'
 import ExportsDropdown from './ExportsDropdown'
 import SnapshotsDropdown from './SnapshotsDropdown'
 
@@ -58,7 +58,7 @@ const View = () => {
         </button>
         {
           ['answers', 'questions'].includes(detail) && (
-            <DocumentOptionsDropdown onChanged={reloadView}/>
+            <DocumentOptions onChanged={reloadView}/>
           )
         }
         <SnapshotsDropdown onChange={handleSnapshotChange}/>
