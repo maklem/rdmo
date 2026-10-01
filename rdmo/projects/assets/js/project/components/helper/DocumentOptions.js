@@ -21,9 +21,7 @@ const DocumentOptions = ({ onChanged }) => {
   }
 
   return (
-    <Link
-      onClick={handleClick}
-    >
+    <Link onClick={handleClick}>
       {isTruthy(get(config, 'document.includeHelp')) && gettext('Remove help text') || gettext('Include help text')}
     </Link>
   )
